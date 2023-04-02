@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - posix-types-ifdefs-ci
   pull_request: {}
 
 defaults:
@@ -13,13 +14,13 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         ghc: ['8.0', '8.2', '8.4', '8.6', '8.8', '8.10', '9.0']
     steps:
     - uses: actions/checkout@v2
-    - uses: haskell/actions/setup@v1
+    - uses: haskell/actions/setup@v2
       id: setup-haskell-cabal
       with:
         ghc-version: ${{ matrix.ghc }}
